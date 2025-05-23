@@ -2,8 +2,8 @@ import mongoose from "mongoose"
 
 const messageSchema = new mongoose.Schema({
     senderId:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        type: mongoose.Schema.Types.ObjectId, //linking message model to user model
+        ref: "User",  //This ObjectId refers to a document in the User collection.
         required : true
     },
     reciverId:{
@@ -20,6 +20,6 @@ const messageSchema = new mongoose.Schema({
 
 }, {timestamps: true})
 
-const messageModel = mongoose.models.message || mongoose.model("message", messageSchema)
+const messageModel = mongoose.models.Message || mongoose.model("Message", messageSchema)
 
 export default messageModel;
