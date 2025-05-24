@@ -4,10 +4,17 @@ import cookieParser from "cookie-parser"
 import authRouter from "./routes/authRoute.js";
 import { connectDB } from "./lib/db.js";
 import messageRouter from "./routes/messageRoue.js";
+import cors from "cors";
 
 const app = express()
 app.use(express.json())
 app.use(cookieParser())
+
+app.use(cors({
+   origin:"http://localhost:5001" ,
+   credentials: true,
+
+}))
 
 const port = process.env.PORT
 
