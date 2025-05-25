@@ -1,7 +1,9 @@
+import { Buffer } from 'buffer';
 import jwt from "jsonwebtoken"
 import "dotenv/config"
 
 export const createToken = (userId, res)=>{
+    
     const token = jwt.sign({userId}, process.env.JWT_SECRET, {
         expiresIn:"2d" //shows in 2 days login will be expires
     })

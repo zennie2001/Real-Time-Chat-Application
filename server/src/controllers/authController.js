@@ -38,7 +38,7 @@ try {
         createToken(newUser._id, res)
         await newUser.save();
 
-        res.send(201).json(
+        res.status(201).json(
             {_id:newUser._id,
              name: newUser.name,
              email: newUser.email,
@@ -75,7 +75,7 @@ const login = async (req , res) =>{
 
         createToken(user._id, res)
 
-         res.send(200).json(
+         res.status(200).json(
             {_id:user._id,
              name: user.name,
              email: user.email,
@@ -94,7 +94,7 @@ const login = async (req , res) =>{
 const logout = async (req , res) =>{
     try {
         res.cookie("jwt", "", {maxAge:0})
-        res.send(200).json({message:"Logged out successfully!"})
+        res.status(200).json({message:"Logged out successfully!"})
         
     } catch (error) {
          console.log("Error in logout", error.message);
