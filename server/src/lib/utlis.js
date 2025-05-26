@@ -1,10 +1,11 @@
-import { Buffer } from 'buffer';
+
 import jwt from "jsonwebtoken"
-import "dotenv/config"
+import dotenv from "dotenv";
+dotenv.config();
 
 export const createToken = (userId, res)=>{
-    
-    const token = jwt.sign({userId}, process.env.JWT_SECRET, {
+    try {
+        const token = jwt.sign({userId}, process.env.JWT_SECRET, {
         expiresIn:"2d" //shows in 2 days login will be expires
     })
 
@@ -18,6 +19,13 @@ export const createToken = (userId, res)=>{
     })
 
     return token;
+        
+    } catch (error) {
+       
+    console.error("Token creation error:", error);
+    return null;
+        
+    }
 
 }
 

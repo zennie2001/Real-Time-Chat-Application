@@ -1,8 +1,7 @@
 import {create} from "zustand"
 import { axiosInstance } from "../lib/axios"
-import axios from "axios"
 import toast from "react-hot-toast"
-import { updateProfile } from "../../../server/src/controllers/authController"
+
 
 export const useAuthStore = create((set) =>({
     authUser:null,
@@ -69,20 +68,20 @@ export const useAuthStore = create((set) =>({
         }
     },
 
-    // updateProfile: async (data)=>{
-    //     set({isUpdatingProfile : true})
-    //     try {
-    //         const res = await axiosInstance.put("/auth/update-profile", data)
-    //         set({authUser: res.data})
-    //         toast.success("Profile Updated Successfully!")
+    updateProfile: async (data)=>{
+        set({isUpdatingProfile : true})
+        try {
+            const res = await axiosInstance.put("/auth/update-profile", data)
+            set({authUser: res.data})
+            toast.success("Profile Updated Successfully!")
 
             
-    //     } catch (error) {
-    //         console.log("Error in upload profile", error);
-    //         toast.error("error")
-    //     }finally{
-    //        set({isUpdatingProfile : false}) 
-    //     }
-    // }
+        } catch (error) {
+            console.log("Error in upload profile", error);
+            toast.error(error)
+        }finally{
+           set({isUpdatingProfile : false}) 
+        }
+    }
 
 }))
