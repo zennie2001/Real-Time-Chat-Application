@@ -22,7 +22,7 @@ app.use(cors({
 const port = process.env.PORT
 
 app.use("/api/auth", authRouter)
-app.use("api/message", messageRouter)
+app.use("/api/messages", messageRouter)
 
 app.listen(port, ()=>{
     console.log("Server is running on port " + port);
