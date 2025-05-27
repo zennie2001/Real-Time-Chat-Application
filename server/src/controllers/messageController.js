@@ -5,6 +5,7 @@ import userModel from "../models/userModel.js";
 
 
 
+
 const getUserForSidebar = async (req , res)=>{
     try {
         const loggedInUserId = req.user._id;
@@ -17,25 +18,24 @@ const getUserForSidebar = async (req , res)=>{
     }
 }
 
-const getMessages = async (req , res)=>{
-    try {
-        const {id:userToChatId} = req.params
-        const myId = req.user._id
+const getMessages = async (req, res) => {
+  try {
+    const { id: userToChatId } = req.params;
+    const myId = req.user._id;
 
-        const messages = await messageModel.find({
-            $or:[
-                {senderId:myId, receiverId:userToChatId},
-                {senderId:userToChatId, receiverId:myId}
-            ]
-        })
+    const messages = await messageModel.find({
+      $or: [
+        { senderId: myId.toString(), reciverId: userToChatId.toString() },
+        { senderId: userToChatId.toString(), reciverId: myId.toString() },
+      ],
+    });
 
-        res.status(200).json(messages)
-        
-    } catch (error) {
-        console.log("Error in getMessage Controller", error.message);
-         res.status(500).json({message:"Internal Server"})
-    }
-}
+    res.status(200).json(messages);
+  } catch (error) {
+    console.log("Error in getMessages controller: ", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
 
 
 const sendMessage = async (req, res) =>{

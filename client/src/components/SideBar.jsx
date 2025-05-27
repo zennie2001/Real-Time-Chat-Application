@@ -3,8 +3,10 @@ import { useChatStore } from '../store/useChatStore'
 import SidebarSkeleton from './skeletons/SidebarSkeleton';
 import { Users } from 'lucide-react';
 import { useAuthStore } from '../store/useAuthStore';
+import { useNavigate } from "react-router-dom";
 
 const SideBar = () => {
+    const navigate = useNavigate();
     const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading } = useChatStore()
 
     const {onlineUsers} = useAuthStore()
@@ -13,6 +15,16 @@ const SideBar = () => {
     useEffect(()=>{
     getUsers()
     },[getUsers])
+
+    const handleSelectUser = (user) => {
+    // Set the selected user (your existing logic)
+    setSelectedUser(user);
+
+    // Navigate to /chat on small screens only
+    if (window.innerWidth <= 640) {
+      navigate("/chat");
+    }
+   };
 
     //  const filteredUsers = showOnlineOnly
     // ? users.filter((user) => onlineUsers.includes(user._id))
@@ -97,7 +109,7 @@ const SideBar = () => {
        {users.map((user) => (
           <button
             key={user._id}
-            onClick={() => setSelectedUser(user)}
+            onClick={() => handleSelectUser(user)}
             className={`
               w-full p-3 flex items-center  gap-3
               hover:bg-base-300 transition-colors
@@ -119,7 +131,7 @@ const SideBar = () => {
             </div>
 
             {/* User info - only visible on larger screens */}
-            <div className="block pr-[500px] md:pr-2 lg:pr-2  text-left  ">
+            <div className="block pr-[500px]  md:pr-0 lg:pr-0  text-left  ">
               <div className="font-medium truncate">{user.name}</div>
               <div className="text-sm text-zinc-400">
                 {onlineUsers.includes(user._id) ? "Online" : "Offline"}
@@ -131,10 +143,7 @@ const SideBar = () => {
        
       </div>
             
-            
-            
-            
-            </aside>
+    </aside>
   )
 }
 

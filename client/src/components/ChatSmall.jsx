@@ -6,8 +6,9 @@ import MessageSkeleton from './skeletons/MessageSkeleton';
 import { useAuthStore } from '../store/useAuthStore';
 import { formatMessageTime } from '../lib/utils';
 import { useRef } from 'react';
+import ChatHeadSmall from './ChatHeadSmall';
 
-const ChatContainer = () => {
+const ChatSmall = () => {
     const {
     messages,
     getMessages,
@@ -35,7 +36,7 @@ const ChatContainer = () => {
 
    if (isMessagesLoading) {
     return (
-      <div className="w-full flex flex-col overflow-auto">
+      <div className="flex-1 flex flex-col overflow-auto">
         <ChatHeader />
         <MessageSkeleton />
         <MessageInput />
@@ -44,12 +45,12 @@ const ChatContainer = () => {
   }
 
 
-  return (
-    
-    <div className=" w-full flex flex-col overflow-auto">
-      <ChatHeader />
 
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+  return (
+    <div className=" h-screen flex-1 pt-20  w-full flex flex-col ">
+        <ChatHeadSmall/>
+
+       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.map((message) => (
           <div
             key={message._id}
@@ -89,16 +90,9 @@ const ChatContainer = () => {
 
 
      
-
-
-
-
       <MessageInput/>
     </div>
-
-
-   
   )
 }
 
-export default ChatContainer
+export default ChatSmall

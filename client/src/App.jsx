@@ -11,6 +11,8 @@ import { useEffect } from 'react'
 import {Loader} from "lucide-react"
 import { Toaster } from 'react-hot-toast'
 import { useThemeStore } from './store/useThemeStore'
+import ChatSmall from './components/ChatSmall'
+
 
 function App() {
   const {authUser, checkAuth, isCheckingAuth} = useAuthStore()
@@ -39,6 +41,7 @@ function App() {
         <Route path='/signup' element={!authUser ? <Signup/> : <Navigate to="/" /> } />
         <Route path='/login' element={!authUser ? <Login/> : <Navigate to="/login" />} />
         <Route path='/setting' element={ <Setting/> } />
+        <Route path="/chat" element={authUser ? <ChatSmall /> : <Navigate to="/login" />} />
         <Route path='/profile' element={authUser ? <Profile/> : <Navigate to="/login" />} />
       </Routes>
 

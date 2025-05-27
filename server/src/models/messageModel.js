@@ -3,12 +3,12 @@ import mongoose from "mongoose"
 const messageSchema = new mongoose.Schema({
     senderId:{
         type: mongoose.Schema.Types.ObjectId, //linking message model to user model
-        ref: "User",  //This ObjectId refers to a document in the User collection.
+        ref: "user",  //This ObjectId refers to a document in the User collection.
         required : true
     },
     reciverId:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: "user",
         required : true
     },
     text:{
