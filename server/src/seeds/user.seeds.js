@@ -1,6 +1,6 @@
 import { config } from "dotenv";
-import { connectDB } from "../lib/db";
-import userModel from "../models/userModel";
+import { connectDB } from "../lib/db.js";
+import userModel from "../models/userModel.js";
 config();
 
 const seedUsers = [
