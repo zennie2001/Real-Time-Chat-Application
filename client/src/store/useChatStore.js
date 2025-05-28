@@ -2,6 +2,7 @@ import {create} from "zustand"
 import { persist } from "zustand/middleware";
 import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
+import { useAuthStore } from "./useAuthStore";
 
 export const useChatStore = create(persist((set, get)=>({
     messages:[],
@@ -55,9 +56,29 @@ export const useChatStore = create(persist((set, get)=>({
         }
     },
 
+    subscribeToMessages: ()=>{
+      const {selectedUser} = get()
+      if(!selectedUser) return;
+
+      const socket = useAuthStore.getState().socket
+
+      socket.on("newMessage", (newMessage)=>{
+        set({
+          messages: [...get().messages, newMessage]
+        })
+      })
+    },
+
+    unsubscribeFromMessages: ()=>{
+      const socket = useAuthStore.getState().socket;
+      socket.off("newMessage")
+    },
+
     setSelectedUser: (selectedUser)=> set({selectedUser}),
     
 }),
+
+  
 
     {
       name: "chat-storage", // localStorage key

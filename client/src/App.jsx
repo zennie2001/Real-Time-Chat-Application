@@ -15,8 +15,11 @@ import ChatSmall from './components/ChatSmall'
 
 
 function App() {
-  const {authUser, checkAuth, isCheckingAuth} = useAuthStore()
+  const {authUser, checkAuth, isCheckingAuth, onlineUsers} = useAuthStore()
   const {theme} = useThemeStore()
+
+  console.log(onlineUsers);
+  
 
   useEffect(()=>{
     checkAuth()
@@ -39,7 +42,7 @@ function App() {
       <Routes>
         <Route path='/' element= {authUser ? <Home/> : <Navigate to="/login" />} />
         <Route path='/signup' element={!authUser ? <Signup/> : <Navigate to="/" /> } />
-        <Route path='/login' element={!authUser ? <Login/> : <Navigate to="/login" />} />
+        <Route path='/login' element={!authUser ? <Login/> : <Navigate to="/" />} />
         <Route path='/setting' element={ <Setting/> } />
         <Route path="/chat" element={authUser ? <ChatSmall /> : <Navigate to="/login" />} />
         <Route path='/profile' element={authUser ? <Profile/> : <Navigate to="/login" />} />
