@@ -1,12 +1,12 @@
 import express from "express";
 import 'dotenv/config'
 import cookieParser from "cookie-parser"
-import authRouter from "./routes/authRoute.js";
-import { connectDB } from "./lib/db.js";
-import messageRouter from "./routes/messageRoue.js";
+import authRouter from "./src/routes/authRoute.js";
+import { connectDB } from "./src/lib/db.js";
+import messageRouter from "./src/routes/messageRoue.js";
 import cors from "cors";
-import { app , server} from "./lib/socket.js";
-import path from "path"
+import { app , server} from "./src/lib/socket.js";
+
 
 
 app.use(express.json());
@@ -21,18 +21,12 @@ app.use(cors({
 }))
 
 const port = process.env.PORT
-const __dirname = path.resolve()
+
 
 app.use("/api/auth", authRouter)
 app.use("/api/messages", messageRouter)
 
-if(process.env.NODE_ENV === "production"){
-    app.use(express.static(path.join(__dirname, "../client/dist")))
 
-    app.get("*", (req, res)=>{
-        res.sendFile(path.join(__dirname, "../client", "dist", "index.html"))
-    })
-}
 
 app.get('/', (req, res)=>{
     res.send('API is working')
