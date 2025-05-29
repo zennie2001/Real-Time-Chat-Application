@@ -6,6 +6,7 @@ import { connectDB } from "./lib/db.js";
 import messageRouter from "./routes/messageRoue.js";
 import cors from "cors";
 import { app , server} from "./lib/socket.js";
+import path from "path"
 
 
 app.use(express.json());
@@ -20,9 +21,18 @@ app.use(cors({
 }))
 
 const port = process.env.PORT
+const __dirname = path.resolve()
 
 app.use("/api/auth", authRouter)
 app.use("/api/messages", messageRouter)
+
+if(process.env.NODE_ENV === "production"){
+    app.use(express.static(path.join(__dirname, "../client/dist")))
+
+    app.get("*", (req, res)=>{
+        res.sendFile(path.join(__dirname, "../client", "dist", "index.html"))
+    })
+}
 
 app.get('/', (req, res)=>{
     res.send('API is working')
