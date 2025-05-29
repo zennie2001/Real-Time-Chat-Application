@@ -8,8 +8,6 @@ import cors from "cors";
 import { app , server} from "./lib/socket.js";
 
 
-app
-
 app.use(express.json());
 app.use(cookieParser());
 
@@ -25,6 +23,10 @@ const port = process.env.PORT
 
 app.use("/api/auth", authRouter)
 app.use("/api/messages", messageRouter)
+
+app.get('/', (req, res)=>{
+    res.send('API is working')
+})
 
 server.listen(port, ()=>{
     console.log("Server is running on port " + port);

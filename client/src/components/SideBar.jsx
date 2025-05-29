@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { useChatStore } from '../store/useChatStore'
 import SidebarSkeleton from './skeletons/SidebarSkeleton';
 import { Users } from 'lucide-react';
@@ -96,7 +96,7 @@ const SideBar = () => {
 //     </aside>
 
 
-    <aside className="h-full w-full md:w-20  lg:w-72 border-r border-base-300 flex flex-col transition-all duration-200">
+    <aside className="h-full w-full md:w-20  lg:w-72  border-r border-base-300 flex flex-col transition-all duration-200">
       <div className="border-b border-base-300 w-full p-5">
         <div className="flex items-center gap-2">
          <Users className="size-6" />
@@ -117,7 +117,7 @@ const SideBar = () => {
         </div>
       </div>
 
-            <div className="overflow-y-auto w-full py-3">
+            <div className="  overflow-y-auto w-full py-3">
        {filteredUsers.map((user) => (
           <button
             key={user._id}
@@ -128,7 +128,7 @@ const SideBar = () => {
               ${selectedUser?._id === user._id ? "bg-base-300 ring-1 ring-base-300" : ""}
             `}
           >
-            <div className="relative mx-auto lg:mx-0">
+            <div className="relative sm:mx-0  lg:mx-0">
               <img
                 src={user.profilePic || "/avatar.png"}
                 alt={user.name}
@@ -143,7 +143,7 @@ const SideBar = () => {
             </div>
 
             {/* User info - only visible on larger screens */}
-            <div className="block pr-[500px]  md:pr-0 lg:pr-0  text-left  ">
+            <div className="block   md:pr-0 lg:pr-0  text-left  ">
               <div className="font-medium truncate">{user.name}</div>
               <div className="text-sm text-zinc-400">
                 {onlineUsers.includes(user._id) ? "Online" : "Offline"}

@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
-import { LogOut, MessageSquare, Settings, User } from "lucide-react";
+import { LogOut, Settings, User } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
+import logo from "../assets/swiftlogo.png"
+import logodark from "../assets/swiftlogowhite.png"
+import { useThemeStore } from "../store/useThemeStore";
 
 const Navbar = () => {
   const { logout, authUser } = useAuthStore();
+  const { theme} = useThemeStore();
 
   return (
     <header
@@ -14,10 +18,11 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-full">
           <div className="flex items-center gap-8">
             <Link to="/" className="flex items-center gap-2.5 hover:opacity-80 transition-all">
-              <div className="size-9 rounded-lg bg-primary/10 flex items-center justify-center">
-                <MessageSquare className="w-5 h-5 text-primary" />
+              <div className="size-12 rounded-lg bg-primary/10 flex items-center justify-center">
+              {theme === 'light' ?
+                <img  src={logo}/> :  <img src={logodark} />}
               </div>
-              <h1 className="text-lg font-bold">Chatty</h1>
+              <h1 className="text-lg font-bold">SwiftTalk</h1>
             </Link>
           </div>
 
