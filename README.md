@@ -8,4 +8,11 @@ This project is a real-time chat application built with modern web technologies,
 * Authentication: JSON Web Tokens (JWT)
 * Database: MongoDB (with Mongoose)
 
+### 🚀 Key Features:
+* Leveraging Socket.IO for low-latency bi-directional communication.
+* Secure login and registration system using JWT tokens.
+* View online users.
+* Zustand for Global State management.
+
+
 
