@@ -15,7 +15,7 @@ app.use(cookieParser());
 
 
 app.use(cors({
-   origin:"https://real-time-chat-new-frontend.vercel.app" ,
+   origin:["https://real-time-chat-new-frontend.vercel.app", "http://localhost:5173"] ,
    credentials: true,
 
 }))
